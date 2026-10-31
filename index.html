@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diwali After Dark</title>
+<style>
+:root{--site-primary:#6b173d;--site-on-primary:#fff8ed;--site-secondary:#d49a35;--site-on-secondary:#26120d;--site-background:#180d20;--site-on-background:#fff5e8;--site-font-body:'Trebuchet MS',Arial,sans-serif;--site-font-heading:Georgia,'Times New Roman',serif;--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--site-background);color:var(--site-on-background);font-family:var(--site-font-body)}
+#app{min-height:100vh;width:100%;border-radius:0;overflow:hidden;position:relative;background:#1b0d20;color:#fff5e8;isolation:isolate}
+#app::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 0%,#6b2149 0%,#32152f 36%,#180d20 78%)}
+.decor{position:absolute;pointer-events:none;opacity:var(--site-decoration-opacity);z-index:-1}
+.glow{width:220px;height:220px;border-radius:50%;filter:blur(65px);background:#ff9c36;opacity:calc(var(--site-decoration-opacity)*.13);top:8%;left:calc(50% - 110px)}
+.string-lights{top:0;left:0;width:100%;height:62px;display:flex;justify-content:space-around;border-top:2px solid #a66b42;padding:0 5%}
+.bulb{width:9px;height:13px;border-radius:50% 50% 45% 45%;background:#ffd56b;box-shadow:0 0 13px 5px #ffb33d;animation:twinkle 1.7s infinite alternate}
+.bulb:nth-child(2n){animation-delay:.6s;background:#ff8b6b}
+.bulb:nth-child(3n){animation-delay:1s;background:#f7df8b}
+@keyframes twinkle{from{opacity:.45;transform:scale(.85)}to{opacity:1;transform:scale(1.18)}}
+main{max-width:980px;margin:auto;padding:26px 22px 60px}
+.topline{text-align:center;color:#e8bb72;letter-spacing:.24em;text-transform:uppercase;font-size:.68rem;margin-top:34px}
+.hero{text-align:center;padding:30px 0 24px}
+.hero .eyebrow{color:#f0c77d;letter-spacing:.18em;text-transform:uppercase;font-size:.75rem}
+h1{font-family:var(--site-font-heading);font-size:clamp(2.7rem,8vw,5.7rem);line-height:.98;font-weight:500;margin:14px 0 12px;color:#ffe6ad;text-shadow:0 5px 30px #d77b38a6}
+.hero p{color:#f7dfc8;max-width:560px;margin:0 auto;line-height:1.65}
+.hero-art{font-size:clamp(4rem,12vw,7rem);margin:12px 0 2px;display:inline-block;filter:drop-shadow(0 0 22px #ffae48);animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+.hint{margin:22px auto 0;color:#e7bc83;font-size:.86rem}
+.hint span{display:inline-block;animation:bounce 1.1s infinite}
+@keyframes bounce{50%{transform:translateY(5px)}}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:30px auto 0}
+.tile{min-height:156px;border:1px solid #dcae695c;background:linear-gradient(155deg,#ffffff12,#5b1b3c70);color:#fff4df;border-radius:22px;padding:17px 10px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;box-shadow:0 10px 28px #08040c55}
+.tile:hover,.tile:focus-visible{transform:translateY(-6px) scale(1.025);border-color:#f6ca7d;background:linear-gradient(155deg,#8c3b5c,#4c1a3a);box-shadow:0 12px 32px #e58c3c30;outline:none}
+.tile .emoji{font-size:2.65rem;line-height:1.15;filter:drop-shadow(0 0 10px #ffb34b66);animation:float 3.3s ease-in-out infinite}
+.tile:nth-child(2n) .emoji{animation-delay:.7s}
+.tile:nth-child(3n) .emoji{animation-delay:1.2s}
+.tile strong{font-family:var(--site-font-heading);font-size:1.08rem;font-weight:500}
+.tile small{color:#e9c9a8;font-size:.72rem}
+.note{text-align:center;color:#cda987;font-size:.78rem;margin:24px auto 0}
+footer{text-align:center;padding:34px 10px 0;color:#d9b48e;font-size:.8rem}
+footer b{color:#ffe1a2;font-family:var(--site-font-heading);font-size:1.25rem;font-weight:500;display:block;margin-top:8px}
+.modal{position:fixed;inset:0;display:none;place-items:center;padding:20px;background:#09050bd9;z-index:10;backdrop-filter:blur(8px)}
+.modal.open{display:grid;animation:fade .2s ease-out}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.dialog{width:min(100%,470px);max-height:90dvh;overflow-y:auto;border:1px solid #e9bd78a6;border-radius:26px;background:radial-gradient(circle at top,#682849,#2b142c 68%);padding:30px 25px 25px;text-align:center;position:relative;box-shadow:0 20px 90px #0009;animation:pop .25s ease-out}
+@keyframes pop{from{transform:translateY(15px) scale(.96)}to{transform:translateY(0) scale(1)}}
+.close{position:absolute;top:12px;right:15px;border:0;background:transparent;color:#f7d9ae;font-size:1.7rem;cursor:pointer}
+.dialog .big{font-size:3.3rem;margin-bottom:10px;animation:float 2.5s infinite}
+.dialog h2{font:500 calc(2rem * var(--site-heading-scale))/1.1 var(--site-font-heading);color:#ffe4a7;margin:0 0 13px}
+.dialog p{color:#f5dfce;line-height:1.7;margin:0}
+.dialog .gold{color:#f5c66f;font-weight:bold}
+.dialog .smallprint{font-size:.82rem;color:#d6b99e;margin-top:15px}
+.dialog .action{margin-top:22px;min-height:44px;border:1px solid #e8bc73;border-radius:999px;background:#e8bc73;color:#32142b;padding:11px 22px;font-weight:bold;cursor:pointer}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.4)}}
+@media(max-width:650px){main{padding:20px 15px 45px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile{min-height:145px;padding:16px 8px}.tile strong{font-size:1rem}.tile small{font-size:.7rem}.topline{margin-top:24px}.hero{padding-top:24px}.dialog{padding:28px 19px 22px}.dialog p{font-size:.96rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="decor glow"></div>
+<div class="decor string-lights" aria-hidden="true"><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i><i class="bulb"></i></div>
+<main>
+<div class="topline">✨ lights • laughter • late-night memories ✨</div>
+<section class="hero">
+<div class="eyebrow">You're cordially invited to</div>
+<div class="hero-art" aria-hidden="true">🪔</div>
+<h1>Diwali<br>After Dark</h1>
+<p>A little sparkle, a little madness, and a whole lot of festive fun. Come celebrate with us!</p>
+<div class="hint"><span>✦</span> Tap the icons below to unlock the details <span>✦</span></div>
+</section>
+<section class="grid" aria-label="Explore the invitation">
+<button class="tile" data-key="welcome"><span class="emoji">🪔</span><strong>Light the diya</strong><small>Let the festivities begin</small></button>
+<button class="tile" data-key="when"><span class="emoji">🎆</span><strong>Pop a cracker</strong><small>When & where?</small></button>
+<button class="tile" data-key="drinks"><span class="emoji">🍾</span><strong>Drinks scene</strong><small>BYOB, besties!</small></button>
+<button class="tile" data-key="dress"><span class="emoji">👘</span><strong>Dress code</strong><small>Bring the ethnic glam</small></button>
+<button class="tile" data-key="food"><span class="emoji">🍢</span><strong>Food o'clock</strong><small>Come hungry</small></button>
+<button class="tile" data-key="fun"><span class="emoji">🪩</span><strong>The fun stuff</strong><small>Games, cards & dancing</small></button>
+<button class="tile" data-key="friends"><span class="emoji">🫂</span><strong>Bring your gang</strong><small>Friends are welcome</small></button>
+<button class="tile" data-key="rsvp"><span class="emoji">💌</span><strong>One last thing</strong><small>Before you say yes…</small></button>
+</section>
+<p class="note">P.S. Explore every icon — each one has a little festive detail.</p>
+<footer>May your night be bright and your cards be lucky.<b>See you on the festive side! ✨</b></footer>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="dialog">
+<button class="close" aria-label="Close">×</button>
+<div class="big" id="modal-emoji">🪔</div>
+<h2 id="modal-title">A little festive welcome</h2>
+<p id="modal-copy"></p>
+<div class="smallprint" id="modal-note"></div>
+<button class="action" id="next">Back to the party ✨</button>
+</div>
+</div>
+</div>
+<script>
+const details={
+welcome:{emoji:'🪔',title:'We’re hosting a Diwali party!',copy:'You’re invited for an evening of lights, laughter, good food and questionable dance moves. Let’s make this Diwali one to remember!',note:'Your presence is the real sparkle. ✨'},
+when:{emoji:'🎆',title:'Save the date!',copy:'<span class="gold">Wednesday, 4 November 2026</span><br><span class="gold">7:00 PM onwards</span><br><br>Venue: <span class="gold">Our flat</span><br>We’ll share the exact address / flat details with you directly.',note:'Come on time. The fun won’t wait!'},
+drinks:{emoji:'🍸',title:'The bar is what we make it!',copy:'It’s a <span class="gold">BYOB scene</span> — bring your favourite drinks!<br><br>We’re also planning cocktails and mocktails. Only catch? We need a few lovely humans to <span class="gold">volunteer as bartenders</span>. No experience required, enthusiasm mandatory.',note:'Volunteer bartenders, please report for duty.'},
+dress:{emoji:'👘',title:'Ethnic is the assignment',copy:'Dress code: <span class="gold">ETHNIC</span>!<br><br>Kurtas, sarees, lehengas, Indo-western fits — bring out the festive wardrobe. Extra glam is always welcome.',note:'Let’s make the group pictures iconic.'},
+food:{emoji:'🍢',title:'Good food is non-negotiable',copy:'Snacks will be waiting for you!<br><br>For dinner, we’ll put the options up for a <span class="gold">group vote</span> and order whatever wins the majority. Democracy, but make it delicious.',note:'Arrive hungry. Vote wisely.'},
+fun:{emoji:'🪩',title:'The night’s agenda',copy:'<span class="gold">Card games</span>, dancing, and plenty of other games are on the cards. Expect friendly competition, dramatic celebrations and absolutely no shortage of chaos.',note:'Poker face optional. Dance moves compulsory.'},
+friends:{emoji:'🫂',title:'The more, the merrier… with a tiny check!',copy:'You can bring friends along, but please <span class="gold">check with us first</span> before inviting anyone. Just give us a heads-up so we can plan food, drinks and space.',note:'A quick message to the hosts is all it takes.'},
+rsvp:{emoji:'💌',title:'RSVP with Varunika!',copy:'Let us know if you’re coming so we can plan the snacks, dinner and all the fun. And if you’re bringing a friend, check with us first.<br><br><span class="gold">Varunika · 8052388542</span><br><a href="https://wa.me/91805238542?text=Hi%20Varunika!%20I%27m%20RSVPing%20for%20Diwali%20After%20Dark." target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;padding:12px 20px;min-height:44px;border-radius:999px;background:#25D366;color:#102016;text-decoration:none;font-weight:bold;">WhatsApp Varunika</a>',note:'Can’t wait to celebrate with you. ❤️'}
+};
+const modal=document.getElementById('modal');
+const title=document.getElementById('modal-title');
+const copy=document.getElementById('modal-copy');
+const emoji=document.getElementById('modal-emoji');
+const note=document.getElementById('modal-note');
+function openCard(key){const d=details[key];emoji.textContent=d.emoji;title.textContent=d.title;copy.innerHTML=d.copy;note.textContent=d.note;modal.classList.add('open');document.getElementById('next').focus();}
+document.querySelectorAll('.tile').forEach(button=>button.addEventListener('click',()=>openCard(button.dataset.key)));
+function closeCard(){modal.classList.remove('open');}
+document.querySelector('.close').addEventListener('click',closeCard);
+document.getElementById('next').addEventListener('click',closeCard);
+modal.addEventListener('click',e=>{if(e.target===modal)closeCard();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard();});
+</script>
+</body>
+</html>
